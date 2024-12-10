@@ -19,7 +19,7 @@ adrBlogger createElmBlogger(string nama, string email, int kode) {
 }
 
 void addBlogger(List &B, adrBlogger p) {
-    int x = chooseMenu();
+    //int x = chooseLastFirst();
     //Trial
     while () {
         if (firstBlogger(B) != NULL) {
@@ -39,6 +39,24 @@ void addBlogger(List &B, adrBlogger p) {
     }  
 }
 
-void findPlatform(List B, List P, int IDblogger) {
+adrBlogger findBlogger(List B, int IDblogger) {
+    adrBlogger b = firstBlogger(B);
+    while (b != NULL && kodePenulis(b) != IDblogger) {
+        b = nextBlogger(b);
+    }
+    return b;
+}
 
+void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p) {
+    //int x = chooseLastFirst();
+    //Trial
+    while () {
+        if (firstBlogger(B) != NULL) {
+            if (x == 1) {
+                p = firstBlogger(B);
+                firstBlogger(B) = nextBlogger(p);
+                nextBlogger(p) = NULL;
+            }
+        }
+    }
 }

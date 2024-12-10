@@ -60,7 +60,7 @@ void print(List B, List P, List W);
 adrBlogger findBlogger(List B, int IDblogger);
 void findPlatform(List B, List P, int IDblogger);
 void countPlatform(List B, List P, int IDblogger);
-void deleteBlogger(List B, List W, adrBlogger &p);
+void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p);
 void deletePlatform(List P, List W, 
 adrPlatform &p, int IDblogger);
 void menu();
