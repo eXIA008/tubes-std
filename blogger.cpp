@@ -1,14 +1,10 @@
 #include "blogger.h"
 
 void createListBlogger(List &B) {
-    /*{IS : Terdefinisi sebuah double link list B
-    FS : first dari list tersebut NULL}*/
     firstBlogger(B) = NULL;
     lastBlogger(B) = NULL;
 }
 adrBlogger createElmBlogger(string nama, string email, int kode) {
-    /*{IS : Terdefinisi nama, email, dan kode blogger yang akan dibuat ke elemen Blogger 
-    FS : Mengembalikan elemen Blogger yang berisi nama, email, dan kodePenulis}*/
     adrBlogger b = new blogger;
     namaBlogger(b) = nama;
     emailBlogger(b) = email;

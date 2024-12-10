@@ -1,5 +1,6 @@
 #ifndef blogger_H
 #define blogger_H
+#include <string>
 #include <iostream>
 #define namaBlogger(B) B->namaBlogger
 #define emailBlogger(B) B->emailBlogger
@@ -9,7 +10,7 @@
 #define namaPlatform(P) P->namaPlatform
 #define urlPlatform(P) P->urlPlatform
 #define nextPlatform(P) P->nextPlatform
-#define bloggerID(W) W->bloggerID
+#define kodePenulis(W) W->bloggerID
 #define platformUsed(W) W->platformUsed
 #define nextWriting(W) W->nextWriting
 #define firstBlogger(B) B.firstBlogger
