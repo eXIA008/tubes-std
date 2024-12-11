@@ -18,6 +18,8 @@
 #define firstPlatform(P) P.firstPlatform
 #define firstWriting(W) W.firstWriting
 
+using namespace std;
+
 typedef blogger *adrBlogger;
 typedef platform *adrPlatform;
 typedef writing *adrWriting;
@@ -46,23 +48,29 @@ struct List {
     adrWriting firstWriting;
 };
 
-
+/* Blogger */
 void createListBlogger(List &B);
 adrBlogger createElmBlogger(string nama, string email, int kode);
 void addBlogger(List &B, adrBlogger p);
+adrBlogger findBlogger(List B, int IDblogger);
+void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p);
+
+/* Platform*/
 void createListPlatform(List &P);
 adrPlatform createElmPlatform(string nama, string url);
 void addPlatform(List &P, adrPlatform p);
+void findPlatform(List B, List P, int IDblogger);
+void countPlatform(List B, List P, int IDblogger);
+void deletePlatform(List P, List W, adrPlatform &p, int IDblogger);
+
+/* Writing*/
 void createListWriting(List &W);
 adrWriting createElmWriting();
 void addWriting (List &B, adrBlogger b, adrPlatform p);
+
+/* Menu */
 void print(List B, List P, List W);
-adrBlogger findBlogger(List B, int IDblogger);
-void findPlatform(List B, List P, int IDblogger);
-void countPlatform(List B, List P, int IDblogger);
-void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p);
-void deletePlatform(List P, List W, 
-adrPlatform &p, int IDblogger);
 void menu();
+int chooseLastFirst(string option);
 
 #endif

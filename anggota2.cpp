@@ -1,5 +1,4 @@
-#include "blogger.h"
-#include "menu.h"
+#include "header.h"
 using namespace std;
 
 void createListBlogger(List &B) {
@@ -19,22 +18,22 @@ adrBlogger createElmBlogger(string nama, string email, int kode) {
 }
 
 void addBlogger(List &B, adrBlogger p) {
-    //int x = chooseLastFirst();
+    int x = chooseLastFirst("add");
     //Trial
     while () {
         if (firstBlogger(B) != NULL) {
             if (x == 1) {
                 nextBlogger(p) = firstBlogger(B);
+                prevBlogger(firstBlogger(B)) = p;
                 firstBlogger(B) = p;
             } else {
-                adrBlogger h = firstBlogger(B);
-                while (nextBlogger(h) != NULL) {
-                    h = nextBlogger(h);
-                }
-                nextBlogger(h) = p;
+                nextBlogger(lastBlogger(B)) = p;
+                prevBlogger(p) = lastBlogger(B);
+                lastBlogger(B) = p;
             }
         } else {
             firstBlogger(B) = p;
+            lastBlogger(B) = p;
         }
     }  
 }
@@ -48,15 +47,32 @@ adrBlogger findBlogger(List B, int IDblogger) {
 }
 
 void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p) {
-    //int x = chooseLastFirst();
+    int x = chooseLastFirst("del");
     //Trial
     while () {
         if (firstBlogger(B) != NULL) {
-            if (x == 1) {
-                p = firstBlogger(B);
-                firstBlogger(B) = nextBlogger(p);
-                nextBlogger(p) = NULL;
+            if (firstBlogger(B) == lastBlogger(B)) {
+                p = lastBlogger(B);
+                lastBlogger(B) = NULL;
+                firstBlogger(B) = NULL;
+            } else {
+                if (x == 1) {
+                    p = firstBlogger(B);
+                    firstBlogger(B) = nextBlogger(p);
+                    prevBlogger(nextBlogger(p)) = NULL;
+                    nextBlogger(p) = NULL;
+                } else {
+                    p = lastBlogger(B);
+                    lastBlogger(B) = prevBlogger(p);
+                    nextBlogger(prevBlogger(p)) = NULL;
+                    prevBlogger(p) = NULL;
+                }
             }
+            
+        } else  {
+            p = NULL;
         }
     }
 }
+
+
