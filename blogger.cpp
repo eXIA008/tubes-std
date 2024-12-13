@@ -18,24 +18,34 @@ adrBlogger createElmBlogger(string nama, string email, int kode) {
 }
 
 void addBlogger(List &B, adrBlogger p) {
-    int x = chooseLastFirst("add");
-    //Trial
-    while () {
-        if (firstBlogger(B) != NULL) {
-            if (x == 1) {
-                nextBlogger(p) = firstBlogger(B);
-                prevBlogger(firstBlogger(B)) = p;
-                firstBlogger(B) = p;
-            } else {
-                nextBlogger(lastBlogger(B)) = p;
-                prevBlogger(p) = lastBlogger(B);
-                lastBlogger(B) = p;
-            }
-        } else {
-            firstBlogger(B) = p;
-            lastBlogger(B) = p;
-        }
+    string op;
+    while (op != "N" || op != "n") {
+        //disini minta input aja dari user nigger
+        cout << "Lanjutkan ? (Y/N) : ";
+        cin >> op;
     }  
+}
+
+void insertFirstBlogger(List &B, adrBlogger p) {
+    if (firstBlogger(B) != NULL) {
+        nextBlogger(lastBlogger(B)) = p;
+        prevBlogger(p) = lastBlogger(B);
+        lastBlogger(B) = p;
+    } else {
+        firstBlogger(B) = p;
+        lastBlogger(B) = p;
+    }
+}
+
+void insertLastBlogger(List &B, adrBlogger p) {
+    if (firstBlogger(B) != NULL) {
+        nextBlogger(p) = firstBlogger(B);
+        prevBlogger(firstBlogger(B)) = p;
+        firstBlogger(B) = p;
+    } else {
+        firstBlogger(B) = p;
+        lastBlogger(B) = p;
+    }
 }
 
 adrBlogger findBlogger(List B, int IDblogger) {

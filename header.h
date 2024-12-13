@@ -52,6 +52,8 @@ struct List {
 void createListBlogger(List &B);
 adrBlogger createElmBlogger(string nama, string email, int kode);
 void addBlogger(List &B, adrBlogger p);
+void insertFirstBlogger(List &B, adrBlogger p);
+void insertLastBlogger(List &B, adrBlogger p);
 adrBlogger findBlogger(List B, int IDblogger);
 void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p);
 
@@ -68,7 +70,7 @@ void createListWriting(List &W);
 adrWriting createElmWriting();
 void addWriting (List &B, adrBlogger b, adrPlatform p);
 
-/* Menu */
+/* Menu (Kalo Pake)*/
 void print(List B, List P, List W);
 void menu();
 int chooseLastFirst(string option);
