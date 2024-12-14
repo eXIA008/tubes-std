@@ -78,11 +78,30 @@ void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p) {
                     prevBlogger(p) = NULL;
                 }
             }
-            
         } else  {
             p = NULL;
         }
     }
 }
 
+void printBlogger(List W) {
+    adrWriting  w = firstWriting(W);
+    cout << "------------------------------------" << endl;
+    cout << "|          Daftar Blogger          |" << endl;
+    cout << "------------------------------------" << endl;
+    if (firstWriting(W) != NULL) {
+        cout << "------------------------------------" << endl;
+        while (w != NULL) {
+            cout << "Kode Blogger : " << kodePenulis(infoBlogger(w)) << endl;
+            cout << "Nama Blogger : " << namaBlogger(infoBlogger(w)) << endl;
+            cout << "Email Blogger : " << emailBlogger(infoBlogger(w)) << endl;
+            w = nextWriting(w);
+        }
+        cout << "------------------------------------" << endl;
+    } else {
+        cout << "------------------------------------" << endl;
+        cout << "|       There is no Blogger!       |" << endl;
+        cout << "------------------------------------" << endl;
+    }
+}
 

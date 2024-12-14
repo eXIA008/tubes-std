@@ -4,15 +4,19 @@
 #include <iostream>
 #define namaBlogger(B) B->namaBlogger
 #define emailBlogger(B) B->emailBlogger
-#define kodeBlogger(B) B->kodeBlogger
+#define kodePenulis(B) B->kodePenulis
 #define nextBlogger(B) B->nextBlogger
 #define prevBlogger(B) B->prevBlogger
+
 #define namaPlatform(P) P->namaPlatform
 #define urlPlatform(P) P->urlPlatform
 #define nextPlatform(P) P->nextPlatform
-#define kodePenulis(W) W->bloggerID
-#define platformUsed(W) W->platformUsed
+
+#define judulTulisan(W) W->judulTulisan
+#define infoBlogger(W) W->infoBlogger
+#define infoPlatform(W) W->infoPlatform
 #define nextWriting(W) W->nextWriting
+
 #define firstBlogger(B) B.firstBlogger
 #define lastBlogger(B) B.lastBlogger
 #define firstPlatform(P) P.firstPlatform
@@ -32,12 +36,14 @@ struct blogger {
 
 struct platform {
     string namaPlatform, urlPlatform;
+    int jumlahPengguna;
     adrPlatform nextPlatform;
 };
 
 struct writing {
-    adrBlogger bloggerID;
-    adrPlatform platformUsed;
+    string judulTulisan;
+    adrBlogger infoBlogger;
+    adrPlatform infoPlatform;
     adrWriting nextWriting;
 };
 
@@ -56,6 +62,7 @@ void insertFirstBlogger(List &B, adrBlogger p);
 void insertLastBlogger(List &B, adrBlogger p);
 adrBlogger findBlogger(List B, int IDblogger);
 void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p);
+void printBlogger(List B);
 
 /* Platform*/
 void createListPlatform(List &P);
@@ -71,7 +78,7 @@ adrWriting createElmWriting();
 void addWriting (List &B, adrBlogger b, adrPlatform p);
 
 /* Menu (Kalo Pake)*/
-void print(List B, List P, List W);
+void printAll(List B, List P, List W);
 void menu();
 int chooseLastFirst(string option);
 
