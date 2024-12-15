@@ -61,7 +61,7 @@ void addBlogger(List &B, adrBlogger p);
 void insertFirstBlogger(List &B, adrBlogger p);
 void insertLastBlogger(List &B, adrBlogger p);
 adrBlogger findBlogger(List B, int IDblogger);
-void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p);
+void deleteBlogger(List &B, List W, int IDblogger, adrBlogger &p);
 void printBlogger(List B);
 
 /* Platform*/
