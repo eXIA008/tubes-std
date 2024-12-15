@@ -80,6 +80,6 @@ void addWriting (List &B, adrBlogger b, adrPlatform p);
 /* Menu (Kalo Pake)*/
 void printAll(List B, List P, List W);
 void menu();
-int chooseLastFirst(string option);
+int chooseLastFirst();
 
 #endif
