@@ -1,7 +1,7 @@
 #include "header.h"
 using namespace std;
 
-void createListBlogger(List &B) {
+void createListBlogger(ListB &B) {
     firstBlogger(B) = NULL;
     lastBlogger(B) = NULL;
 }
@@ -17,7 +17,7 @@ adrBlogger createElmBlogger(string nama, string email, int kode) {
     return b;
 }
 
-void addBlogger(List &B) {
+void addBlogger(ListB &B) {
     string op = "Y", nama, email;
     int kode;
     adrBlogger b, check;
@@ -41,16 +41,15 @@ void addBlogger(List &B) {
                 insertFirstBlogger(B, b);
             }
         } else {
-            cout << "------------------------------------" << endl;
-            cout << "|     Blogger Already Existed!     |" << endl;
-            cout << "------------------------------------" << endl;
+            cout << "Blogger sudah ada!" << endl;
         }
+
         cout << "Lanjutkan ? (Y/N)";
         cin >> op;
     }
 }
 
-void insertLastBlogger(List &B, adrBlogger p) {
+void insertLastBlogger(ListB &B, adrBlogger p) {
     if (firstBlogger(B) != NULL) {
         nextBlogger(lastBlogger(B)) = p;
         prevBlogger(p) = lastBlogger(B);
@@ -60,8 +59,7 @@ void insertLastBlogger(List &B, adrBlogger p) {
         lastBlogger(B) = p;
     }
 }
-
-void insertFirstBlogger(List &B, adrBlogger p) {
+void insertFirstBlogger(ListB &B, adrBlogger p) {
     if (firstBlogger(B) != NULL) {
         nextBlogger(p) = firstBlogger(B);
         prevBlogger(firstBlogger(B)) = p;
@@ -71,65 +69,45 @@ void insertFirstBlogger(List &B, adrBlogger p) {
         lastBlogger(B) = p;
     }
 }
-
-adrBlogger findBlogger(List B, int IDblogger) {
+adrBlogger findBlogger(ListB B, int IDblogger) {
     adrBlogger b = firstBlogger(B);
-
     while (b != NULL && kodePenulis(b) != IDblogger) {
         b = nextBlogger(b);
     }
     return b;
 }
 
-void deleteBlogger(List B, List W, int IDblogger, adrBlogger &p) {
-    int x = chooseLastFirst();
-    if (firstBlogger(B) != NULL) {
-        if (firstBlogger(B) == lastBlogger(B)) {
-            p = lastBlogger(B);
-            lastBlogger(B) = NULL;
-            firstBlogger(B) = NULL;
+void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p) {
+    adrBlogger check = findBlogger(B, IDblogger);
+    if (check != NULL) {
+        delBlogWriting(W, P, check);
+        p = check;
+        if (check == firstBlogger(B)) {
+            prevBlogger(firstBlogger(B)) = NULL;
+            firstBlogger(B) = nextBlogger(p);
+            nextBlogger(p) = NULL;
+        } else if (check == lastBlogger(B)) {
+            nextBlogger(prevBlogger(p)) = NULL;
+            lastBlogger(B) = prevBlogger(p);
+            prevBlogger(p) = NULL; 
         } else {
-            if (x == 2) {
-                p = firstBlogger(B);
-                firstBlogger(B) = nextBlogger(p);
-                prevBlogger(nextBlogger(p)) = NULL;
-                nextBlogger(p) = NULL;
-            } else {
-                p = lastBlogger(B);
-                lastBlogger(B) = prevBlogger(p);
-                nextBlogger(prevBlogger(p)) = NULL;
-                prevBlogger(p) = NULL;
+            adrBlogger b = firstBlogger(B);
+            while (nextBlogger(b) != check) {
+                b = nextBlogger(b);
             }
+            nextBlogger(b) = nextBlogger(p);
+            prevBlogger(nextBlogger(p)) = b;
+            prevBlogger(p) = NULL;
+            nextBlogger(p) = NULL;
         }
-    } else  {
-        p = NULL;
+    } else {
+        cout << "Blogger tidak ada!";
     }
 }
 
-void printBlogger(List W) {
-    /* Print Blogger berdasarkan List Relasi
-    adrWriting  w = firstWriting(W);
-
-    cout << "------------------------------------" << endl;
-    cout << "|          Daftar Blogger          |" << endl;
-    cout << "------------------------------------" << endl;
-    if (firstWriting(W) != NULL) {
-        cout << "------------------------------------" << endl;
-        while (w != NULL) {
-            cout << "Kode Blogger : " << kodePenulis(infoBlogger(w)) << endl;
-            cout << "Nama Blogger : " << namaBlogger(infoBlogger(w)) << endl;
-            cout << "Email Blogger : " << emailBlogger(infoBlogger(w)) << endl;
-            w = nextWriting(w);
-        }
-        cout << "------------------------------------" << endl;
-    } else {
-        cout << "------------------------------------" << endl;
-        cout << "|       There is no Blogger!       |" << endl;
-        cout << "------------------------------------" << endl;
-    }
-    */
-    adrBlogger b = firstBlogger(W); //Kalo proc ini cuma buat blogger rubah W jadi B
-    if (firstBlogger(W) != NULL) {
+void printBlogger(ListB B) {
+    adrBlogger b = firstBlogger(B); 
+    if (firstBlogger(B) != NULL) {
         cout << "------------------------------------" << endl;
         while (b != NULL) {
             cout << "Kode Blogger : " << kodePenulis(b) << endl;
@@ -144,4 +122,6 @@ void printBlogger(List W) {
         cout << "------------------------------------" << endl;
     }
 }
+
+
 

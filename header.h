@@ -12,7 +12,6 @@
 #define urlPlatform(P) P->urlPlatform
 #define nextPlatform(P) P->nextPlatform
 
-#define judulTulisan(W) W->judulTulisan
 #define infoBlogger(W) W->infoBlogger
 #define infoPlatform(W) W->infoPlatform
 #define nextWriting(W) W->nextWriting
@@ -36,50 +35,55 @@ struct blogger {
 
 struct platform {
     string namaPlatform, urlPlatform;
-    int jumlahPengguna;
     adrPlatform nextPlatform;
 };
 
 struct writing {
-    string judulTulisan;
     adrBlogger infoBlogger;
     adrPlatform infoPlatform;
     adrWriting nextWriting;
 };
 
-struct List {
+struct ListB {
     adrBlogger firstBlogger;
     adrBlogger lastBlogger;
-    adrPlatform firstPlatform;
+};
+struct ListP {
+    adrPlatform firstPlatform;    
+};
+
+struct ListW {
     adrWriting firstWriting;
 };
 
 /* Blogger */
-void createListBlogger(List &B);
+void createListBlogger(ListB &B);
 adrBlogger createElmBlogger(string nama, string email, int kode);
-void addBlogger(List &B, adrBlogger p);
-void insertFirstBlogger(List &B, adrBlogger p);
-void insertLastBlogger(List &B, adrBlogger p);
-adrBlogger findBlogger(List B, int IDblogger);
-void deleteBlogger(List &B, List W, int IDblogger, adrBlogger &p);
-void printBlogger(List B);
+void addBlogger(ListB &B, adrBlogger p);
+void insertFirstBlogger(ListB &B, adrBlogger p);
+void insertLastBlogger(ListB &B, adrBlogger p);
+adrBlogger findBlogger(ListB B, int IDblogger);
+void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p);
+void delBlogWriting(ListW &W, ListP &P, adrBlogger b);
+void printBlogger(ListB B);
 
-/* Platform*/
-void createListPlatform(List &P);
+/* Platform */
+void createListPlatform(ListP &P);
 adrPlatform createElmPlatform(string nama, string url);
-void addPlatform(List &P, adrPlatform p);
-void findPlatform(List B, List P, int IDblogger);
-void countPlatform(List B, List P, int IDblogger);
-void deletePlatform(List P, List W, adrPlatform &p, int IDblogger);
+void addPlatform(ListP &P, adrPlatform p);
+adrPlatform findPlatform(ListP P, string nama);
+void delPlatform(ListP &P, adrPlatform &p);
 
-/* Writing*/
-void createListWriting(List &W);
-adrWriting createElmWriting();
-void addWriting (List &B, adrBlogger b, adrPlatform p);
+/* Writing */
+void createListWriting(ListW &W);
+adrWriting createElmWriting(adrBlogger b, adrPlatform p);
+void addWriting (ListW &W, adrBlogger b, adrPlatform p);
 
-/* Menu (Kalo Pake)*/
-void printAll(List B, List P, List W);
-void menu();
+/* Menu (Kalo Pake) */
+void printAll(ListW W);
+void mainMenu();
+void menuBlogger();
+void menuPlatform();
 int chooseLastFirst();
 
 #endif
