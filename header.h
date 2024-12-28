@@ -2,6 +2,7 @@
 #define blogger_H
 #include <string>
 #include <iostream>
+#include <conio.h>
 #define namaBlogger(B) B->namaBlogger
 #define emailBlogger(B) B->emailBlogger
 #define kodePenulis(B) B->kodePenulis
@@ -59,7 +60,7 @@ struct ListW {
 /* Blogger */
 void createListBlogger(ListB &B);
 adrBlogger createElmBlogger(string nama, string email, int kode);
-void addBlogger(ListB &B, adrBlogger p);
+void addBlogger(ListB &B);
 void insertFirstBlogger(ListB &B, adrBlogger p);
 void insertLastBlogger(ListB &B, adrBlogger p);
 adrBlogger findBlogger(ListB B, int IDblogger);
@@ -70,20 +71,26 @@ void printBlogger(ListB B);
 /* Platform */
 void createListPlatform(ListP &P);
 adrPlatform createElmPlatform(string nama, string url);
-void addPlatform(ListP &P, adrPlatform p);
+void addPlatform(ListW &W, ListB B, ListP &P);
 adrPlatform findPlatform(ListP P, string nama);
-void delPlatform(ListP &P, adrPlatform &p);
+void findPlatformOnBlogger(ListB B, ListP P, ListW W);
+void delPlatform(ListP &P, adrPlatform p);
+void delPlatformOnBlogger(ListB B, ListW &W, ListP &P);
+void countPlatformOnBlogger(ListB B, ListP P, ListW W);
 
 /* Writing */
 void createListWriting(ListW &W);
 adrWriting createElmWriting(adrBlogger b, adrPlatform p);
-void addWriting (ListW &W, adrBlogger b, adrPlatform p);
+void addWriting(ListW &W, adrBlogger b, adrPlatform p);
+bool findWriting(ListW W, adrWriting w);
+void delWriting(ListW &W, adrWriting w);
+bool findWriting(ListW W, adrWriting w);
+void printAll(ListW W, ListB B);
 
 /* Menu (Kalo Pake) */
-void printAll(ListW W);
-void mainMenu();
-void menuBlogger();
-void menuPlatform();
+void mainMenu(ListB B, ListP P, ListW W);
+void menuBlogger(ListB &B, ListP &P, ListW &W);
+void menuPlatform(ListB &B, ListP &P, ListW &W);
 int chooseLastFirst();
 
 #endif

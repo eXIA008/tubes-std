@@ -13,8 +13,7 @@ adrPlatform createElmPlatform(string nama, string url) {
     return p;
 
 }
-
-void addPlatform(ListW &W, ListB B, ListP &P, adrPlatform p) {
+void addPlatform(ListW &W, ListB B, ListP &P) {
     string op = "Y", nama, url;
     int kode;
     adrBlogger checkB;
@@ -51,13 +50,12 @@ void addPlatform(ListW &W, ListB B, ListP &P, adrPlatform p) {
         } else {
             cout << "Blogger tidak ada!";
         }
-        
         cout << "Lanjutkan ? (Y/N)";
         cin >> op;
     }
 }
 adrPlatform findPlatform(ListP P, string nama){
-    adrBlogger p = firstBlogger(P);
+    adrPlatform p = firstPlatform(P);
 
     while (p != NULL && urlPlatform(p) != nama) {
         p = nextBlogger(p);
@@ -65,35 +63,25 @@ adrPlatform findPlatform(ListP P, string nama){
     return p;
 }
 
-void delPlatform(ListP P, adrPlatform &b){
-    adrPlatform check = findBlogger(B, IDblogger);
-    if (check != NULL) {
-        delBlogWriting(W,)
-        p = check;
-        if (check == firstBlogger(B)) {
-            prevBlogger(firstBlogger(B)) = NULL;
-            firstBlogger(B) = nextBlogger(p);
-            nextBlogger(p) = NULL;
-        } else if (check == lastBlogger(B)) {
-            nextBlogger(prevBlogger(p)) = NULL;
-            lastBlogger(B) = prevBlogger(p);
-            prevBlogger(p) = NULL; 
-        } else {
-            adrPlatform p = firstPlatform(P);
-            while (nextBlogger(p) != NULL) {
-                b = nextBlogger(b);
-            }
-            nextBlogger(b) = nextBlogger(p);
-            prevBlogger(nextBlogger(p)) = b;
-            prevBlogger(p) = NULL;
-            nextBlogger(p) = NULL;
+void delPlatform(ListP &P, adrPlatform p){
+    adrPlatform del,temp = firstPlatform(P);
+    if (p == firstPlatform(P)) {
+        del = firstPlatform(P);
+        firstPlatform(P) = nextPlatform(del);
+        nextPlatform(del) = NULL;
+    } else if (nextPlatform(p) == NULL) {
+        while (nextPlatform(nextPlatform(temp)) != NULL) {
+            temp = nextPlatform(temp);
         }
-        adrWriting rel = findWriting(W, check);
-        if (rel != NULL) {
-            infoBlogger(rel) = NULL;
-        }
+        del = nextPlatform(temp);
+        nextPlatform(temp) = NULL;
     } else {
-        cout << "Blogger tidak ada!";
+        while (nextPlatform(temp) != p) {
+            temp = nextPlatform(temp);
+        }
+        del = nextPlatform(temp);
+        nextPlatform(temp) = nextPlatform(del);
+        nextPlatform(del) = NULL;
     }
 }
 
@@ -116,16 +104,49 @@ void findPlatformOnBlogger(ListB B, ListP P, ListW W) {
             w = nextWriting(w);
         }
         if (found) {
-        cout << "Blogger " << namaBlogger(checkB) << " menggunakan Platform " << namaPlat;
+            cout << "Blogger " << namaBlogger(checkB) << " menggunakan Platform " << namaPlat << endl;
         } else {
-        cout << "Blogger " << namaBlogger(checkB) << " tidak menggunakan Platform " << namaPlat;
+            cout << "Blogger " << namaBlogger(checkB) << " tidak menggunakan Platform " << namaPlat<< endl;
         }
     } else {
-        cout << "Blogger tidak ada!";
+        cout << "Blogger tidak ada!" << endl;
+    }
+    cout << "Tekan sembarang tombol...";
+    getch();
+}
+
+void delPlatformOnBlogger(ListB B, ListW &W, ListP &P) {
+    bool found = false;
+    int kode;
+    string namaPlat;
+    cout << "Kode Blogger : ";
+    cin >> kode;
+    adrBlogger checkB = findBlogger(B, kode);
+    if (checkB != NULL) {
+        cout << "Nama Platform : ";
+        cin >> namaPlat;
+        adrPlatform checkP = findPlatform(P, namaPlat);
+        adrWriting w = firstWriting(W);
+        while (w != NULL) {
+            if (infoBlogger(w) == checkB && infoPlatform(w) == checkP) {
+                if (firstWriting(W) != NULL){
+                    delWriting(W, w);
+                    found = true;
+                } 
+            }
+            w = nextWriting(w);
+        }
+        if (found) {
+            cout << "Platform " << namaPlat << "dihapus dari Blogger " << namaBlogger(checkB) << endl;
+        } else {
+            cout << "Blogger " << namaBlogger(checkB) << " tidak menggunakan Platform " << namaPlat<< endl;
+        }
+    } else {
+        cout << "Blogger tidak ada!" << endl;
     }
 }
 
-int countPlatformOnBlogger(ListB B, ListP P, ListW W) {
+void countPlatformOnBlogger(ListB B, ListP P, ListW W) {
     int i = 0, kode;
     string nama;
     
@@ -140,8 +161,8 @@ int countPlatformOnBlogger(ListB B, ListP P, ListW W) {
             }
             w = nextWriting(w);
         }
+         cout << "Blogger " << namaBlogger(checkB) << " memiliki" << i << " platform" << endl;
     } else {
         cout << "Blogger tidak ada!";
     }
-    return i;
 }

@@ -16,29 +16,33 @@ int chooseLastFirst() {
         if (opt == 1 || opt == 2) {
             return opt;
         } else {
-            cout << "Invalid Option! Please try again." << endl;
+            cout << "Invalid Option!" << endl;
         }
     }
 }
 
-void mainMenu() {
+void mainMenu(ListB B, ListP P, ListW W) {
     int opt;
     while (true) {
+        system("cls");
         cout << "------------------------------------" << endl;
         cout << "|             Main Menu            |" << endl;
         cout << "------------------------------------" << endl;
         cout << "| 1. Blogger                       |" << endl;
         cout << "| 2. Platform                      |" << endl;
-        cout << "| 3. Exit                          |" << endl;
+        cout << "| 3. Tampilkan Blogger dan platform|" << endl;
+        cout << "| 4. Exit                          |" << endl;
         cout << "------------------------------------" << endl;
         cout << "| Option : ";
         cin >> opt;
         cout << "------------------------------------" << endl;
         if (opt == 1) {
-            menuBlogger();
+            menuBlogger(B, P, W);
         } else if (opt == 2) {
-            menuPlatform();
+            menuPlatform(B, P, W);
         } else if (opt == 3) {
+            printAll(W, B);
+        } else if (opt == 4) {
             return;
         } else {
             cout << "Invalid Option!" << endl;
@@ -46,9 +50,10 @@ void mainMenu() {
     }
 }
 
-void menuBlogger() {
-    int opt;
+void menuBlogger(ListB &B, ListP &P, ListW &W) {
+    int opt, kode;
     while (true) {
+        system("cls");
         cout << "------------------------------------" << endl;
         cout << "|           Menu Blogger           |" << endl;
         cout << "------------------------------------" << endl;
@@ -62,36 +67,55 @@ void menuBlogger() {
         cin >> opt;
         cout << "------------------------------------" << endl;
         if (opt == 1) {
-            menuBlogger();
+            addBlogger(B);
         } else if (opt == 2) {
-            menuPlatform();
+            printBlogger(B);
         } else if (opt == 3) {
+            adrBlogger p;
+            cout << "Kode Blogger yang ingin dihapus : "; cin >> kode;
+            delBlogger(B, W, P, kode, p);
+        } else if (opt == 4) {
+            adrBlogger p;
+            cout << "Kode Blogger : "; cin >> kode;
+            p = findBlogger(B, kode);
+            if (p!=NULL) {
+                cout << "Blogger " << namaBlogger(p) << " ditemukan!"<< endl;
+            } else {
+                cout << "Blogger tidak ditemukan!" << endl;
+            }
+        } else if (opt == 5) {
             return;
         } else {
-            cout << "Invalid Option!" << endl;
+            cout << "Invalid Option!";
         }
     }
 }
 
-void menuPlatform() {
+void menuPlatform(ListB &B, ListP &P, ListW &W) {
     int opt;
     while (true) {
+        system("cls");
         cout << "------------------------------------" << endl;
-        cout << "|             Main Menu            |" << endl;
+        cout << "|          Menu Platform           |" << endl;
         cout << "------------------------------------" << endl;
-        cout << "| 1. Blogger                       |" << endl;
-        cout << "| 2. Platform                      |" << endl;
-        cout << "| 3. Print All                     |" << endl;
-        cout << "| 4. Exit                          |" << endl;
+        cout << "| 1. Tambah Platform pada Blogger  |" << endl;
+        cout << "| 2. Mencari Platform pada Blogger |" << endl;
+        cout << "| 3. Hapus Platform dari Blogger   |" << endl;
+        cout << "| 4. Jumlah Platform dari Blogger  |" << endl;
+        cout << "| 5. Back                          |" << endl;
         cout << "------------------------------------" << endl;
         cout << "| Option : ";
         cin >> opt;
         cout << "------------------------------------" << endl;
         if (opt == 1) {
-            menuBlogger();
+           addPlatform(W, B, P);
         } else if (opt == 2) {
-            menuPlatform();
+            findPlatformOnBlogger(B, P, W);
         } else if (opt == 3) {
+            delPlatformOnBlogger(B, W, P);
+        } else if (opt == 4) {
+            countPlatformOnBlogger(B, P, W);
+        } else if (opt == 5) {
             return;
         } else {
             cout << "Invalid Option!" << endl;

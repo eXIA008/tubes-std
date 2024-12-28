@@ -43,7 +43,6 @@ void addBlogger(ListB &B) {
         } else {
             cout << "Blogger sudah ada!" << endl;
         }
-
         cout << "Lanjutkan ? (Y/N)";
         cin >> op;
     }
@@ -76,7 +75,6 @@ adrBlogger findBlogger(ListB B, int IDblogger) {
     }
     return b;
 }
-
 void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p) {
     adrBlogger check = findBlogger(B, IDblogger);
     if (check != NULL) {
@@ -100,11 +98,12 @@ void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p) {
             prevBlogger(p) = NULL;
             nextBlogger(p) = NULL;
         }
+        cout << "Blogger " << namaBlogger(check) << " berhasil dihapus!" << endl;
     } else {
-        cout << "Blogger tidak ada!";
+        cout << "Blogger tidak ada!" << endl;
     }
+    getch();
 }
-
 void printBlogger(ListB B) {
     adrBlogger b = firstBlogger(B); 
     if (firstBlogger(B) != NULL) {
@@ -113,15 +112,13 @@ void printBlogger(ListB B) {
             cout << "Kode Blogger : " << kodePenulis(b) << endl;
             cout << "Nama Blogger : " << namaBlogger(b) << endl;
             cout << "Email Blogger : " << emailBlogger(b) << endl;
+            cout << "------------------------------------" << endl;
             b = nextBlogger(b);
         }
         cout << "------------------------------------" << endl;
     } else {
-        cout << "------------------------------------" << endl;
-        cout << "|       There is no Blogger!       |" << endl;
-        cout << "------------------------------------" << endl;
+        cout << "Blogger tidak ada!" << endl;
     }
+    cout << "Tekan sembarang tombol...";
+    getch();
 }
-
-
-

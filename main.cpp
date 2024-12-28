@@ -1,6 +1,14 @@
 #include <iostream>
+#include "header.h"
 using namespace std;
 
 int main(){
-    std::cout << "kontol" << endl;
+    ListB B;
+    ListP P;
+    ListW W;
+    createListBlogger(B);
+    createListPlatform(P);
+    createListWriting(W);
+    mainMenu(B, P, W);
+    return 0;
 }
