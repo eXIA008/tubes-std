@@ -15,8 +15,8 @@ adrWriting createElmWriting(adrBlogger b, adrPlatform p){
 
 void addWriting(ListW &W, adrBlogger b, adrPlatform p){
     adrWriting w = createElmWriting(b, p), temp;
-    bool checkW = findWriting(W, w);
-    if (checkW) {
+    bool checkW = findWriting(W, b, p);
+    if (checkW == false) {
         if (firstWriting(W) != NULL) {
             temp = firstWriting(W);
             while (nextWriting(temp) != NULL) {
@@ -31,20 +31,19 @@ void addWriting(ListW &W, adrBlogger b, adrPlatform p){
     }
 }
 
-bool findWriting(ListW W, adrWriting w){
-    bool b = false;
+bool findWriting(ListW W, adrBlogger b, adrPlatform p){
+    bool s = false;
     adrWriting temp = firstWriting(W);
     while (temp != NULL) {
-        if (temp == w){
-            b = true;
-        } 
+        if (infoBlogger(temp) == b && infoPlatform(temp) == p){
+            s = true;
+        }
         temp = nextWriting(temp);
     }
-    
-    return b;
+
+    return s;
 }
 void printAll(ListW W, ListB B) {
-    adrWriting w = firstWriting(W);
     adrBlogger b = firstBlogger(B);
     adrPlatform p;
     cout << "------------------------------------" << endl;
@@ -54,50 +53,46 @@ void printAll(ListW W, ListB B) {
         while (b != NULL) {
             cout << "Kode Blogger : " << kodePenulis(b) << endl;
             cout << "Nama Blogger : " << namaBlogger(b) << endl;
-            cout << "Email Blogger : " << emailBlogger(b) << endl;
-            cout << "--------------------------------" << endl;
-            cout << "Menulis di Platform : " << endl << endl;
+            cout << "Email Blogger : " << emailBlogger(b) << endl << endl;
+            cout << "Menulis di Platform : " << endl;
+            adrWriting w = firstWriting(W);
             while (w != NULL) {
                 if (infoBlogger(w) == b) {
                     p = infoPlatform(w);
                     cout << "Nama Platform : " << namaPlatform(p) << endl;
                     cout << "Url Platform : " << urlPlatform(p) << endl;
-                } else {
-                    cout << "-" << endl;
+                    cout << "------------------------------------" << endl;
                 }
                 w = nextWriting(w);
             }
-            cout << "--------------------------------" << endl;
+            cout << "------------------------------------" << endl;
             b = nextBlogger(b);
         }
     } else {
         cout << "Blogger tidak ada!" << endl;
     }
-    cout << "------------------------------------" << endl;
     cout << "Tekan sembarang tombol...";
     getch();
 }
-// 
+
 void delBlogWriting(ListW &W, ListP &P, adrBlogger b) {
     adrWriting w = firstWriting(W);
-    adrWriting checkw = firstWriting(W);
     adrPlatform p;
     while (w != NULL) {
         if (infoBlogger(w) == b) {
             p = infoPlatform(w);
-            infoBlogger(w) = NULL;
-            infoPlatform(w) = NULL;
+            delWriting(W, w);
             bool found = false;
+            adrWriting checkw = firstWriting(W);
             while (checkw != NULL) {
                 if (infoPlatform(checkw) == p) {
                     found = true;
                 }
                 checkw = nextWriting(checkw);
             }
-            if (!found) {
+            if (found == false) {
                 delPlatform(P, p);
             }
-            delWriting(W, w);
         }
         w = nextWriting(w);
     }

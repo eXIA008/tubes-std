@@ -31,9 +31,9 @@ void addPlatform(ListW &W, ListB B, ListP &P) {
             cin >> nama;
             cout << "URL Platform : ";
             cin >> url;
-            p = createElmPlatform(nama, url);
             checkP = findPlatform(P, nama);
             if (checkP == NULL) {
+                p = createElmPlatform(nama, url);
                 if (firstPlatform(P) != NULL) {
                     temp = firstPlatform(P);
                     while (nextPlatform(temp) != NULL) {
@@ -45,10 +45,10 @@ void addPlatform(ListW &W, ListB B, ListP &P) {
                 }
                 addWriting(W, checkB, p);
             } else {
-                addWriting(W, checkB, p);
+                addWriting(W, checkB, checkP);
             }
         } else {
-            cout << "Blogger tidak ada!";
+            cout << "Blogger tidak ada!" << endl;
         }
         cout << "Lanjutkan ? (Y/N)";
         cin >> op;
@@ -57,8 +57,8 @@ void addPlatform(ListW &W, ListB B, ListP &P) {
 adrPlatform findPlatform(ListP P, string nama){
     adrPlatform p = firstPlatform(P);
 
-    while (p != NULL && urlPlatform(p) != nama) {
-        p = nextBlogger(p);
+    while (p != NULL && namaPlatform(p) != nama) {
+        p = nextPlatform(p);
     }
     return p;
 }
@@ -132,7 +132,7 @@ void delPlatformOnBlogger(ListB B, ListW &W, ListP &P) {
                 if (firstWriting(W) != NULL){
                     delWriting(W, w);
                     found = true;
-                } 
+                }
             }
             w = nextWriting(w);
         }
@@ -144,12 +144,14 @@ void delPlatformOnBlogger(ListB B, ListW &W, ListP &P) {
     } else {
         cout << "Blogger tidak ada!" << endl;
     }
+    cout << "Tekan sembarang tombol...";
+    getch();
 }
 
 void countPlatformOnBlogger(ListB B, ListP P, ListW W) {
     int i = 0, kode;
     string nama;
-    
+
     cout << "Kode Blogger : ";
     cin >> kode;
     adrBlogger checkB = findBlogger(B, kode);
@@ -161,8 +163,10 @@ void countPlatformOnBlogger(ListB B, ListP P, ListW W) {
             }
             w = nextWriting(w);
         }
-         cout << "Blogger " << namaBlogger(checkB) << " memiliki" << i << " platform" << endl;
+         cout << "Blogger " << namaBlogger(checkB) << " memiliki " << i << " platform" << endl;
     } else {
-        cout << "Blogger tidak ada!";
+        cout << "Blogger tidak ada!" << endl;
     }
+    cout << "Tekan sembarang tombol...";
+    getch();
 }

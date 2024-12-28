@@ -10,5 +10,6 @@ int main(){
     createListPlatform(P);
     createListWriting(W);
     mainMenu(B, P, W);
+    cout << "SAYONARA!!! ";
     return 0;
 }

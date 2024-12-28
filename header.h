@@ -24,9 +24,9 @@
 
 using namespace std;
 
-typedef blogger *adrBlogger;
-typedef platform *adrPlatform;
-typedef writing *adrWriting;
+typedef struct blogger *adrBlogger;
+typedef struct platform *adrPlatform;
+typedef struct writing *adrWriting;
 
 struct blogger {
     string namaBlogger, emailBlogger;
@@ -50,7 +50,7 @@ struct ListB {
     adrBlogger lastBlogger;
 };
 struct ListP {
-    adrPlatform firstPlatform;    
+    adrPlatform firstPlatform;
 };
 
 struct ListW {
@@ -64,7 +64,7 @@ void addBlogger(ListB &B);
 void insertFirstBlogger(ListB &B, adrBlogger p);
 void insertLastBlogger(ListB &B, adrBlogger p);
 adrBlogger findBlogger(ListB B, int IDblogger);
-void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p);
+void delBlogger(ListB &B, ListW &W, ListP &P, int IDblogger, adrBlogger &p);
 void delBlogWriting(ListW &W, ListP &P, adrBlogger b);
 void printBlogger(ListB B);
 
@@ -84,7 +84,7 @@ adrWriting createElmWriting(adrBlogger b, adrPlatform p);
 void addWriting(ListW &W, adrBlogger b, adrPlatform p);
 bool findWriting(ListW W, adrWriting w);
 void delWriting(ListW &W, adrWriting w);
-bool findWriting(ListW W, adrWriting w);
+bool findWriting(ListW W, adrBlogger b, adrPlatform p);
 void printAll(ListW W, ListB B);
 
 /* Menu (Kalo Pake) */

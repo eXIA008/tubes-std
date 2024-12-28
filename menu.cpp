@@ -76,13 +76,15 @@ void menuBlogger(ListB &B, ListP &P, ListW &W) {
             delBlogger(B, W, P, kode, p);
         } else if (opt == 4) {
             adrBlogger p;
-            cout << "Kode Blogger : "; cin >> kode;
+            cout << "Kode Blogger : ";
+            cin >> kode;
             p = findBlogger(B, kode);
             if (p!=NULL) {
                 cout << "Blogger " << namaBlogger(p) << " ditemukan!"<< endl;
             } else {
                 cout << "Blogger tidak ditemukan!" << endl;
             }
+            getch();
         } else if (opt == 5) {
             return;
         } else {
@@ -99,10 +101,11 @@ void menuPlatform(ListB &B, ListP &P, ListW &W) {
         cout << "|          Menu Platform           |" << endl;
         cout << "------------------------------------" << endl;
         cout << "| 1. Tambah Platform pada Blogger  |" << endl;
-        cout << "| 2. Mencari Platform pada Blogger |" << endl;
-        cout << "| 3. Hapus Platform dari Blogger   |" << endl;
-        cout << "| 4. Jumlah Platform dari Blogger  |" << endl;
-        cout << "| 5. Back                          |" << endl;
+        cout << "| 2. Mencari Platform              |" << endl;
+        cout << "| 3. Mencari Platform pada Blogger |" << endl;
+        cout << "| 4. Hapus Platform dari Blogger   |" << endl;
+        cout << "| 5. Jumlah Platform dari Blogger  |" << endl;
+        cout << "| 6. Back                          |" << endl;
         cout << "------------------------------------" << endl;
         cout << "| Option : ";
         cin >> opt;
@@ -110,12 +113,23 @@ void menuPlatform(ListB &B, ListP &P, ListW &W) {
         if (opt == 1) {
            addPlatform(W, B, P);
         } else if (opt == 2) {
-            findPlatformOnBlogger(B, P, W);
+            cout << "Masukkan Platform yang ingin dicari : ";
+            string nama;
+            cin >> nama;
+            adrPlatform p = findPlatform(P, nama);
+            if (p!=NULL) {
+                cout << "Platform " << namaPlatform(p) << " ditemukan!"<< endl;
+            } else {
+                cout << "Platform tidak ditemukan!" << endl;
+            }
+            getch();
         } else if (opt == 3) {
-            delPlatformOnBlogger(B, W, P);
+            findPlatformOnBlogger(B, P, W);
         } else if (opt == 4) {
-            countPlatformOnBlogger(B, P, W);
+            delPlatformOnBlogger(B, W, P);
         } else if (opt == 5) {
+            countPlatformOnBlogger(B, P, W);
+        } else if (opt == 6) {
             return;
         } else {
             cout << "Invalid Option!" << endl;

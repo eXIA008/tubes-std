@@ -75,7 +75,7 @@ adrBlogger findBlogger(ListB B, int IDblogger) {
     }
     return b;
 }
-void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p) {
+void delBlogger(ListB &B, ListW &W, ListP &P, int IDblogger, adrBlogger &p) {
     adrBlogger check = findBlogger(B, IDblogger);
     if (check != NULL) {
         delBlogWriting(W, P, check);
@@ -87,7 +87,7 @@ void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p) {
         } else if (check == lastBlogger(B)) {
             nextBlogger(prevBlogger(p)) = NULL;
             lastBlogger(B) = prevBlogger(p);
-            prevBlogger(p) = NULL; 
+            prevBlogger(p) = NULL;
         } else {
             adrBlogger b = firstBlogger(B);
             while (nextBlogger(b) != check) {
@@ -102,10 +102,11 @@ void delBlogger(ListB &B, ListW W, ListP &P, int IDblogger, adrBlogger &p) {
     } else {
         cout << "Blogger tidak ada!" << endl;
     }
+    cout << "Tekan sembarang tombol...";
     getch();
 }
 void printBlogger(ListB B) {
-    adrBlogger b = firstBlogger(B); 
+    adrBlogger b = firstBlogger(B);
     if (firstBlogger(B) != NULL) {
         cout << "------------------------------------" << endl;
         while (b != NULL) {
